@@ -12,7 +12,7 @@ var { BlobServiceClient } = require('@azure/storage-blob');
 var conf = pmx.initModule({
   widget: {
     type: 'generic',
-    logo: 'https://raw.githubusercontent.com/pm2-hive/pm2-logrotate/master/pres/logo.png',
+    logo: 'https://raw.githubusercontent.com/riazXrazor/pm2-logrotate-azure-upload/master/pres/logo.png',
     theme: ['#111111', '#1B2228', '#31C2F1', '#807C7C'],
     el: {
       probes: false,
