@@ -31,7 +31,8 @@
       "script": "app.js",
       "max_memory_restart": "500M",
       "post_update": [
-        "source ~/.bashrc"
+        "source ~/.bashrc",
+        "source ~/.zshrc"
       ]
     }
   ],
