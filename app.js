@@ -41,7 +41,6 @@ else if (process.env.HOME || process.env.HOMEPATH)
 try {
   var customConfig = require(path.resolve(PM2_ROOT_PATH, 'pm2-logrotate-azure-upload-config.js'));
   conf = deepExtend(conf, customConfig);
-  console.log(JSON.stringify(conf,'\n',2))
 } catch (error) { }
 
 if (process.env.SERVER_PUBLIC_IP && typeof process.env.SERVER_PUBLIC_IP === 'string') {
@@ -77,13 +76,11 @@ function get_limit_size() {
 }
 
 function delete_old(file) {
-  console.log("delete_old")
   if (file === "/dev/null") return;
   var fileBaseName = file.substring(0, file.length - 4).split(path.sep).pop() + "__";
   var dirName = path.dirname(file);
 
   fs.readdir(dirName, function (err, files) {
-    // console.log(files)
     var i, len;
     if (err) return pmx.notify(err);
 
@@ -93,7 +90,6 @@ function delete_old(file) {
         rotated_files.push(files[i]);
     }
     rotated_files.sort().reverse();
-    console.log(fileBaseName)
     for (i = rotated_files.length - 1; i >= RETAIN; i--) {
       (function (i) {
 
@@ -101,7 +97,6 @@ function delete_old(file) {
           conf.azureStorageContainer
           && conf.azureStorageConnectionString
         ) {
-          console.log("Azure block")
           var currentTime = new Date();
           var key = `${(conf.azureFilePathFormat || '__filename__')
             .replace(/__ip__/, SERVER_PUBLIC_IP || '')
@@ -259,7 +254,6 @@ pm2.connect(function (err) {
       apps.forEach(function (app) {
         // if its a module and the rotate of module is disabled, ignore
         if (typeof (app.pm2_env.axm_options.isModule) !== 'undefined' && !ROTATE_MODULE) return;
-
         proceed_app(app, false);
       });
     });
@@ -267,7 +261,6 @@ pm2.connect(function (err) {
     // rotate pm2 log
     proceed_file(PM2_ROOT_PATH + '/pm2.log', false);
     proceed_file(PM2_ROOT_PATH + '/agent.log', false);
-    console.log('WORKER_INTERVAL:'+WORKER_INTERVAL)
   }, WORKER_INTERVAL);
 
   // register the cron to force rotate file

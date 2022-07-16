@@ -1,6 +1,6 @@
 {
   "name": "pm2-logrotate-azure-upload",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Module to rotate logs of every pm2 application and upload logs to Azure Storage",
   "main": "app.js",
   "dependencies": {
