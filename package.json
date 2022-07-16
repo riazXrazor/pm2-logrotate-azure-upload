@@ -15,7 +15,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Riaz Laskar",
+  "author": {
+    "name": "Riaz Laskar",
+    "email" : "riazcool77@gmail.com"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/riazxrazor/pm2-logrotate-azure-upload.git"
@@ -45,17 +48,9 @@
     "rotateInterval": "0 0 * * *",
     "rotateModule": true,
     "serverIp": null,
-    "azure": {
-      "credentials": {
-        "storageName": null,
-        "stotageKey": null,
-        "storageConnectionString": null
-      }
-    },
-    "logAzureStorageSetting": {
-      "container": null,
-      "azureFilePathFormat": ""
-    }
+    "azureStorageConnectionString": null,
+    "azureStorageContainer": null,
+    "azureFilePathFormat": ""
   },
   "devDependencies": {
     "dotenv": "^16.0.1"

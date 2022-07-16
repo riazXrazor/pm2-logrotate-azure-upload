@@ -8,6 +8,14 @@ PM2 module to automatically rotate logs of processes managed by PM2 and upload t
 `pm2 install pm2-logrotate-azure-upload`
 
 ## Configure
+
+```javascript
+pm2 set pm2-logrotate-azure-upload:azureStorageConnectionString <AZURE_STORAGE_CONNECTION_STRING>
+pm2 set pm2-logrotate-azure-upload:azureStorageContainer <AZURE_STORAGE_CONTAINER_NAME>
+```
+
+OR 
+
 create pm2-logrotate-azure-upload-config.js file in PM2 home folder which by default is ~/.pm2 .
 set config values as given in example below:
 
@@ -21,22 +29,17 @@ module.exports = {
     "rotateInterval": "* * * * * *",
     "rotateModule": true,
     "serverIp": null,
-    "azure": {
-        "credentials": {
-            "storageConnectionString": "<AZURE_STORAGE_CONNECTION_STRING>"
-        }
-    },
-    "logAzureStorageSetting": {
-        "container": "<AZURE_STORAGE_CONTAINER_NAME>",
-    }
+    "azureStorageConnectionString": "<AZURE_STORAGE_CONNECTION_STRING>",
+    "azureStorageContainer": "<AZURE_STORAGE_CONTAINER_NAME>",
+    "azureFilePathFormat": ""
 }
 ```
 
 ### Config Property Description
 #### AZURE upload properties
 All of the following properties needs to defined for azure upload to work.
-- `azure.credentials.storageConnectionString` (Defaults to `null`): This is Connection string of your azure storage account.
-- `logAzureStorageSetting.container` (Defaults to `null`): This is container name in azure storage account where logs will be stored.
+- `azureStorageConnectionString` (Defaults to `null`): This is Connection string of your azure storage account.
+- `azureStorageContainer` (Defaults to `null`): This is container name in azure storage account where logs will be stored.
 
 #### PM2 log rotate properties
 - `max_size` (Defaults to `10MB`): When a file size becomes higher than this value it will rotate it (its possible that the worker check the file after it actually pass the limit) . You can specify the unit at then end: `10G`, `10M`, `10K`

@@ -98,15 +98,12 @@ function delete_old(file) {
       (function (i) {
 
         if (
-          conf.logAzureStorageSetting
-          && conf.logAzureStorageSetting.container
-          && conf.azure
-          && conf.azure.credentials
-          && conf.azure.credentials.storageConnectionString
+          conf.azureStorageContainer
+          && conf.azureStorageConnectionString
         ) {
           console.log("Azure block")
           var currentTime = new Date();
-          var key = `${(conf.logAzureStorageSetting.azureFilePathFormat || '__filename__')
+          var key = `${(conf.azureFilePathFormat || '__filename__')
             .replace(/__ip__/, SERVER_PUBLIC_IP || '')
             .replace(/__year__/, currentTime.getFullYear())
             .replace(/__month__/, currentTime.getMonth() + 1)
@@ -117,10 +114,10 @@ function delete_old(file) {
           console.log('KEY: ', key);
 
           const blobServiceClient = BlobServiceClient.fromConnectionString(
-            conf.azure.credentials.storageConnectionString
+            conf.azureStorageConnectionString
           );
 
-          const containerClient = blobServiceClient.getContainerClient(conf.logAzureStorageSetting.container);
+          const containerClient = blobServiceClient.getContainerClient(conf.azureStorageContainer);
 
           const blockBlobClient = containerClient.getBlockBlobClient(key);
 
