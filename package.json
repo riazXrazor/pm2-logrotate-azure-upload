@@ -1,0 +1,62 @@
+{
+  "name": "pm2-logrotate-azure-upload",
+  "version": "1.0.0",
+  "description": "Module to rotate logs of every pm2 application and upload logs to Azure Storage",
+  "main": "app.js",
+  "dependencies": {
+    "@azure/storage-blob": "^12.11.0",
+    "dayjs": "^1.11.3",
+    "deep-extend": "^0.6.0",
+    "graceful-fs": "^4.1.11",
+    "node-schedule": "^1.1.1",
+    "pm2": "^5.2.0",
+    "pmx": "latest"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Riaz Laskar",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riazxrazor/pm2-logrotate-azure-upload.git"
+  },
+  "bugs": {
+    "url": "https://github.com/riazxrazor/pm2-logrotate-azure-upload/issues"
+  },
+  "homepage": "https://github.com/riazxrazor/pm2-logrotate-azure-upload",
+  "license": "MIT",
+  "apps": [
+    {
+      "name": "pm2-logrotate-azure-upload",
+      "script": "app.js",
+      "max_memory_restart": "500M",
+      "post_update": [
+        "source ~/.bashrc"
+      ]
+    }
+  ],
+  "config": {
+    "max_size": "10M",
+    "retain": "30",
+    "compress": false,
+    "dateFormat": "YYYY-MM-DD_HH-mm-ss",
+    "workerInterval": "30",
+    "rotateInterval": "0 0 * * *",
+    "rotateModule": true,
+    "serverIp": null,
+    "azure": {
+      "credentials": {
+        "storageName": null,
+        "stotageKey": null,
+        "storageConnectionString": null
+      }
+    },
+    "logAzureStorageSetting": {
+      "container": null,
+      "azureFilePathFormat": ""
+    }
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.1"
+  }
+}
