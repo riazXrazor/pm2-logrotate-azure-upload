@@ -22,11 +22,11 @@ set config values as given in example below:
 ```javascript
 module.exports = {
     "max_size": "10M",
-    "retain": "1",
+    "retain": "10",
     "compress": false,
     "dateFormat": "YYYY-MM-DD_HH-mm-ss",
     "workerInterval": "30",
-    "rotateInterval": "* * * * * *",
+    "rotateInterval": "0 0 * * * *",
     "rotateModule": true,
     "serverIp": null,
     "azureStorageConnectionString": "<AZURE_STORAGE_CONNECTION_STRING>",
