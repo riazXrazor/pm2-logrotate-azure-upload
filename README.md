@@ -22,7 +22,7 @@ set config values as given in example below:
 ```javascript
 module.exports = {
     "max_size": "10M",
-    "retain": "10",
+    "retain": "30",
     "compress": false,
     "dateFormat": "YYYY-MM-DD_HH-mm-ss",
     "workerInterval": "30",
